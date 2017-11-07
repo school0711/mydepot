@@ -2,7 +2,7 @@
 
 <div class="w3-panel w3-aqua">
 
-<table class="w3-table-all">
+<table class="table table-responsive">
 <thead>
   <tr>
     <th><h1>cart</h1></th>
@@ -11,19 +11,22 @@
 </thead>
 <tbody>
   <% @cart.line_items.each do |item| %>
-	    <tr><td><%= item.product.title %></td>
+	    <tr><td><%= item.quantity %> &times; <%= item.product.title %></td>
 	    <td><%= number_to_currency(item.product.price) %></td>
-	    
 	    </tr>
-	  <% end %>
+	    <% end %>
+	    <tr>
+	    <td colspan="2">Total Order Value </td><td><%= number_to_currency(@cart.total_price) %></td>   
+	    </tr>
+	    <tr> <td><%= button_to 'Empty cart', @cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	    <td><%= link_to 'Keep Shopping', store_index_url , class:"w3-button w3-light-green" %></td>
+	    </tr>
 
 
 
 
-<tr>
 
 
-<tr>
 <td>
 <%= link_to 'Edit', edit_cart_path(@cart) ,class:"w3-button w3-light-gray" %> |
 <%= link_to 'Back', carts_path , class:"w3-button w3-light-gray" %>
